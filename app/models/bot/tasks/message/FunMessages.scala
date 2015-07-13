@@ -3,6 +3,10 @@ package models.bot.tasks.message
 /**
  * A list of fun, pre-defined message trees.
  */
+
+ // defaults:
+
+ /**
 object FunMessages {
 
   def messages = List(
@@ -10,11 +14,6 @@ object FunMessages {
       value = "{name} are you a fan of avocados?",
       right = Some(MessageTree(
         value = "So if I asked you to have a guacamole party with me you'd do it?",
-        right = None,
-        left = None
-      )),
-      left = Some(MessageTree(
-        value = "Do women love anything more than avocados?",
         right = None,
         left = None
       ))
@@ -29,5 +28,16 @@ object FunMessages {
       left = None
     )
   )
+}
+*//
 
+object FunMessages {
+  def messages = List(
+        MessageTree(
+      value = "So.... tell me {name}, how's life?"
+    ),
+    MessageTree(
+      value = "Just landed in Berlin, kicking off couple years working in Europe... where's fun on weekdays?"
+    )
+  )
 }
