@@ -69,6 +69,7 @@ class TinderBot(taskWarningThreshold: Int, taskSleepThreshold: Int) extends Acto
         // tasks exceed warning threshold
         case l if l>taskWarningThreshold =>
           Logger.warn("[tinderbot] TinderBot is under pressure (tasks queue > %s)".format(taskWarningThreshold))
+          Logger.info("[tinderbot] Tasks queue size is currently %s".format(l))
 
         // everything else
         case l =>

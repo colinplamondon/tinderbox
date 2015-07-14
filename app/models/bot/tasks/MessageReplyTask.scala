@@ -55,27 +55,27 @@ class MessageReplyTask(val xAuthToken: String, val tinderBot: ActorRef, val matc
           // the conversation is empty, send an opener
           case None =>
             if(m.messages.size==0) {
-              Logger.info("[tinderbot] Did not send message opener to %s. " format m._id)
-              // val randomOpener = FunMessages.messages(Random.nextInt(FunMessages.messages.size)).value.replace("{name}", m.person.map(_.name).getOrElse(""))
-              // new TinderApi(Some(xAuthToken)).sendMessage(m._id, randomOpener).map { result =>
-              //   result match {
-              //     case Left(e) =>
-              //       Logger.error("[tinderbot] Message Reply task couldn't send a message to %s: %s" format(m._id, e.error))
+              // Logger.info("[tinderbot] Did not send message opener to %s. " format m._id)
+              val randomOpener = FunMessages.messages(Random.nextInt(FunMessages.messages.size)).value.replace("{name}", m.person.map(_.name).getOrElse(""))
+              new TinderApi(Some(xAuthToken)).sendMessage(m._id, randomOpener).map { result =>
+                result match {
+                  case Left(e) =>
+                    Logger.error("[tinderbot] Message Reply task couldn't send a message to %s: %s" format(m._id, e.error))
 
-              //     case Right(message) =>
-              //       val user = TinderService.fetchSession(xAuthToken).get
-              //       val log = BotLog(
-              //         System.currentTimeMillis(),
-              //         "message_reply",
-              //         "Sent message reply to %s.".format(m.person.map(_.name).getOrElse("a user")),
-              //         m.person.map(_._id),
-              //         Some(m.person.get.photos.head.url)
-              //       )
-              //       TinderBot.writeLog(user.user._id, log)
-              //       Logger.info("[tinderbot] Sent a message opener to %s. " format m._id)
-              //       Logger.debug("[tinderbot] Message reply was: \"%s...\"" format randomOpener.substring(0, 10))
-              //   }
-              // }
+                  case Right(message) =>
+                    val user = TinderService.fetchSession(xAuthToken).get
+                    val log = BotLog(
+                      System.currentTimeMillis(),
+                      "message_reply",
+                      "Sent message reply to %s.".format(m.person.map(_.name).getOrElse("a user")),
+                      m.person.map(_._id),
+                      Some(m.person.get.photos.head.url)
+                    )
+                    TinderBot.writeLog(user.user._id, log)
+                    Logger.info("[tinderbot] Sent a message opener to %s. " format m._id)
+                    Logger.debug("[tinderbot] Message reply was: \"%s...\"" format randomOpener.substring(0, 10))
+                }
+              }
             } else {
               createStopGap(m, true)
             }

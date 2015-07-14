@@ -29,12 +29,15 @@ object FunMessages {
     )
   )
 }
-*//
+*/
 
 object FunMessages {
   def messages = List(
-        MessageTree(
-      value = "So.... tell me {name}, how's life?"
+    MessageTree(
+      value = "{name}! how's life?"
+    ),
+    MessageTree(
+      value = "{name}! Just arrived four days ago, kicking off couple years working in Europe. Where's fun on weekdays?"
     ),
     MessageTree(
       value = "Just landed in Berlin, kicking off couple years working in Europe... where's fun on weekdays?"
